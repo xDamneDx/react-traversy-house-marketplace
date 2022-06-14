@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
@@ -42,6 +43,12 @@ function SignUp() {
         displayName: name,
       });
 
+      const formDataCopy = { ...formData };
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -63,6 +70,7 @@ function SignUp() {
               id="name"
               value={name}
               onChange={onChange}
+              autoComplete="off"
             />
             <input
               type="email"
@@ -71,6 +79,7 @@ function SignUp() {
               id="email"
               value={email}
               onChange={onChange}
+              autoComplete="off"
             />
             <div className="passwordInputDiv">
               <input
@@ -80,6 +89,7 @@ function SignUp() {
                 id="password"
                 value={password}
                 onChange={onChange}
+                autoComplete="off"
               />
               <img
                 src={visibilityIcon}
