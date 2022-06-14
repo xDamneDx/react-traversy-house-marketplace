@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
+import { toast } from "react-toastify";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
 
@@ -51,7 +52,7 @@ function SignUp() {
 
       navigate("/");
     } catch (error) {
-      console.log(error);
+      toast.error("Oops. Something goes wrong with registration!");
     }
   };
 
@@ -71,6 +72,7 @@ function SignUp() {
               value={name}
               onChange={onChange}
               autoComplete="off"
+              required
             />
             <input
               type="email"
