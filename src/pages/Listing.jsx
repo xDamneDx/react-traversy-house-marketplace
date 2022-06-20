@@ -9,6 +9,16 @@ import shareIcon from "../assets/svg/shareIcon.svg";
 // Components:
 import Spinner from "../components/Spinner";
 
+// Swiper:
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import "swiper/css/a11y";
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+
 function Listing() {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -38,7 +48,23 @@ function Listing() {
 
   return (
     <main>
-      {/* SLIDER */}
+      <Swiper
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        className="swiper-container"
+      >
+        {listing.imageUrls.map((url, index) => (
+          <SwiperSlide key={index}>
+            <div
+              style={{
+                background: `url(${url}) no-repeat center`,
+                backgroundSize: "cover",
+              }}
+              className="swiperSlideDiv"
+            ></div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       <div
         className="shareIconDiv"
