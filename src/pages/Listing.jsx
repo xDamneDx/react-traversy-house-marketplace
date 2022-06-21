@@ -12,11 +12,7 @@ import Spinner from "../components/Spinner";
 // Swiper:
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "swiper/css/a11y";
+import "swiper/css/bundle";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 function Listing() {
